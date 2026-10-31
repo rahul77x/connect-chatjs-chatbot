@@ -1,0 +1,93 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Amazon Connect Chat Backend - StartChatContact API Gateway & Lambda integration
+  Provides the secure endpoint for the custom ChatJS plant website chatbot.
+
+Parameters:
+  ConnectInstanceId:
+    Type: String
+    Description: Amazon Connect Instance ID (GUID)
+    AllowedPattern: '^[a-f0-9\-]{36}$'
+  
+  ConnectContactFlowId:
+    Type: String
+    Description: Amazon Connect Contact Flow ID for chat (GUID)
+    AllowedPattern: '^[a-f0-9\-]{36}$'
+
+  AllowedOrigin:
+    Type: String
+    Default: '*'
+    Description: Domain allowed for CORS (e.g., https://your-plant-site.com or * for dev)
+
+Resources:
+  # ===================================================================
+  # Lambda Execution Role with Amazon Connect StartChatContact permission
+  # ===================================================================
+  StartChatLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: AmazonConnectStartChatPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - connect:StartChatContact
+                Resource:
+                  - !Sub "arn:aws:connect:${AWS::Region}:${AWS::AccountId}:instance/${ConnectInstanceId}/contact-flow/${ConnectContactFlowId}"
+                  - !Sub "arn:aws:connect:${AWS::Region}:${AWS::AccountId}:instance/${ConnectInstanceId}"
+
+  # ===================================================================
+  # Lambda Function
+  # ===================================================================
+  StartChatFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: StartAmazonConnectChatContact
+      Handler: lambda-start-chat.handler
+      Runtime: nodejs20.x
+      Timeout: 10
+      MemorySize: 256
+      Role: !GetAtt StartChatLambdaRole.Arn
+      Environment:
+        Variables:
+          CONNECT_INSTANCE_ID: !Ref ConnectInstanceId
+          CONNECT_CONTACT_FLOW_ID: !Ref ConnectContactFlowId
+          ALLOWED_ORIGIN: !Ref AllowedOrigin
+          CONNECT_REGION: !Ref AWS::Region
+      Events:
+        StartChatApi:
+          Type: Api
+          Properties:
+            Path: /start-chat
+            Method: post
+            RestApiId: !Ref ChatApiGateway
+
+  # ===================================================================
+  # REST API Gateway
+  # ===================================================================
+  ChatApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      Cors:
+        AllowMethods: "'POST,OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowOrigin: !Sub "'${AllowedOrigin}'"
+
+Outputs:
+  ChatEndpointUrl:
+    Description: "Public API URL to configure in the Plant Website frontend"
+    Value: !Sub "https://${ChatApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/start-chat"
+

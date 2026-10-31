@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verdant & Wild | Botanical Boutique & Amazon Connect Plant Care Chatbot</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/chat-widget.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+</head>
+<body>
+
+  <!-- Top Architecture Strip -->
+  <aside class="aws-badge-strip">
+    <span class="badge-pill">AWS CONNECT</span>
+    <span>Powered by <strong>Amazon Connect ChatJS</strong> &bull; Control Plane (<code>StartChatContact</code>) + Data Plane (Participant Service WebSocket)</span>
+  </aside>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="brand-logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5z"/>
+        </svg>
+        <span class="brand-title">Verdant &amp; Wild</span>
+      </a>
+
+      <nav class="site-nav">
+        <a href="#plants" class="nav-link">Rare Plants</a>
+        <a href="#pillars" class="nav-link">Care Guides</a>
+        <a href="#architecture" class="nav-link">Connect Architecture</a>
+      </nav>
+
+      <button id="hero-consult-btn" class="header-cta">
+        <span>🌱 Consult Sprout AI</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Hero Section -->
+  <main>
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span>🌿 Rare Botanicals &amp; AI Plant Doctor</span>
+        </div>
+        <h1 class="hero-title">
+          Nurture Your <span>Sanctuary</span> With Expert Plant Care.
+        </h1>
+        <p class="hero-subtitle">
+          From rare variegated Monsteras to hardy succulents, discover botanical flora paired with real-time horticultural guidance powered by <strong>Amazon Connect ChatJS</strong>.
+        </p>
+
+        <div class="hero-actions">
+          <button id="hero-start-btn" class="btn-primary" data-ask-doctor="Hello Sprout! I need help diagnosing a houseplant issue.">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Ask Plant Doctor Sprout
+          </button>
+          <a href="#plants" class="btn-secondary">
+            Explore Collection &darr;
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-pattern">
+            <svg width="200" height="200" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" stroke="white" stroke-width="2" fill="none"/>
+              <path d="M50 10 Q70 50 50 90 Q30 50 50 10" fill="white"/>
+            </svg>
+          </div>
+          <div class="hero-card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <h3>Sprout: Botanical Care Bot</h3>
+          <p>
+            Connected directly to Amazon Connect's omnichannel engine. Handles instant diagnosis, soil schedules, and live escalation to master horticulturists.
+          </p>
+          <div class="hero-card-stats">
+            <div class="stat-item">
+              <div class="stat-num">&lt; 1s</div>
+              <div class="stat-label">Response Time</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">WSS</div>
+              <div class="stat-label">Realtime ChatJS</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">Lex V2</div>
+              <div class="stat-label">AI NLU Engine</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Plants Catalog -->
+    <section id="plants" class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Curated Foliage</span>
+        <h2 class="section-title">Living Art For Your Home</h2>
+        <p class="section-desc">Each specimen comes paired with botanical consultation. Click "Ask Plant Doctor" on any plant to consult our Amazon Connect chatbot.</p>
+      </div>
+
+      <div class="plants-grid">
+        <!-- Plant 1 -->
+        <article class="plant-card">
+          <div class="plant-image-container">
+            <span class="plant-badge">Rare Variegation</span>
+            <div class="plant-svg-illustration">
+              <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="45" fill="#d8f3dc" opacity="0.6"/>
+                <path d="M50 85 C35 60 25 35 48 18 C65 25 75 55 50 85 Z" fill="#2d6a4f"/>
+                <ellipse cx="42" cy="40" rx="4" ry="10" transform="rotate(-20 42 40)" fill="#d8f3dc"/>
+                <ellipse cx="58" cy="48" rx="4" ry="9" transform="rotate(25 58 48)" fill="#d8f3dc"/>
+                <path d="M50 85 L50 20" stroke="#74c69d" stroke-width="2"/>
+              </svg>
+            </div>
+          </div>
+          <div class="plant-body">
+            <h3 class="plant-title">Monstera Albo Borsigiana</h3>
+            <p class="plant-latin">Monstera deliciosa var. borsigiana</p>
+            <div class="plant-specs">
+              <span class="spec-chip">☀️ Bright Indirect</span>
+              <span class="spec-chip">💧 Weekly Soak</span>
+              <span class="spec-chip">💨 65% Humidity</span>
+            </div>
+            <div class="plant-footer">
+              <span class="plant-price">$185</span>
+              <button class="ask-doctor-btn" data-ask-doctor="Why are my Monstera Albo leaves turning yellow or brown on the white edges?">
+                <span>🌱 Ask Doctor</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Plant 2 -->
+        <article class="plant-card">
+          <div class="plant-image-container">
+            <span class="plant-badge">Statement Tree</span>
+            <div class="plant-svg-illustration">
+              <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="45" fill="#e8eddf" opacity="0.7"/>
+                <path d="M50 85 L50 40" stroke="#b08968" stroke-width="5" stroke-linecap="round"/>
+                <path d="M35 45 C25 25 50 15 65 30 C75 45 60 60 45 55 Z" fill="#1b4332"/>
+                <path d="M55 55 C70 40 85 45 75 65 C65 75 45 70 55 55 Z" fill="#2d6a4f"/>
+              </svg>
+            </div>
+          </div>
+          <div class="plant-body">
+            <h3 class="plant-title">Fiddle Leaf Fig</h3>
+            <p class="plant-latin">Ficus lyrata</p>
+            <div class="plant-specs">
+              <span class="spec-chip">☀️ High Light</span>
+              <span class="spec-chip">💧 Top 2" Dry</span>
+              <span class="spec-chip">🪴 Chunky Mix</span>
+            </div>
+            <div class="plant-footer">
+              <span class="plant-price">$95</span>
+              <button class="ask-doctor-btn" data-ask-doctor="My Fiddle Leaf Fig is dropping its bottom leaves. What am I doing wrong?">
+                <span>🌱 Ask Doctor</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Plant 3 -->
+        <article class="plant-card">
+          <div class="plant-image-container">
+            <span class="plant-badge">Desert Flora</span>
+            <div class="plant-svg-illustration">
+              <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="45" fill="#fdf0ed" opacity="0.7"/>
+                <ellipse cx="50" cy="65" rx="30" ry="12" fill="#d97736"/>
+                <path d="M50 65 C40 45 42 25 50 15 C58 25 60 45 50 65 Z" fill="#52b788"/>
+                <path d="M35 55 C25 45 30 35 40 40 Z" fill="#74c69d"/>
+                <path d="M65 55 C75 45 70 35 60 40 Z" fill="#74c69d"/>
+              </svg>
+            </div>
+          </div>
+          <div class="plant-body">
+            <h3 class="plant-title">Echeveria &amp; Rare Succulents</h3>
+            <p class="plant-latin">Crassulaceae botanical mix</p>
+            <div class="plant-specs">
+              <span class="spec-chip">☀️ Direct Sunlight</span>
+              <span class="spec-chip">💧 Soak &amp; Dry</span>
+              <span class="spec-chip">🪨 Gritty Soil</span>
+            </div>
+            <div class="plant-footer">
+              <span class="plant-price">$38</span>
+              <button class="ask-doctor-btn" data-ask-doctor="How often should I water my succulents and cacti in winter?">
+                <span>🌱 Ask Doctor</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Plant 4 -->
+        <article class="plant-card">
+          <div class="plant-image-container">
+            <span class="plant-badge">Velvet Foliage</span>
+            <div class="plant-svg-illustration">
+              <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="45" fill="#d8f3dc" opacity="0.5"/>
+                <path d="M50 20 C30 20 25 55 50 82 C75 55 70 20 50 20 Z" fill="#081c15"/>
+                <path d="M50 25 L50 78 M35 45 L50 55 M65 45 L50 55 M38 60 L50 68 M62 60 L50 68" stroke="#ffffff" stroke-width="1.8" opacity="0.8"/>
+              </svg>
+            </div>
+          </div>
+          <div class="plant-body">
+            <h3 class="plant-title">Anthurium Clarinervium</h3>
+            <p class="plant-latin">Anthurium clarinervium</p>
+            <div class="plant-specs">
+              <span class="spec-chip">☀️ Dappled Shade</span>
+              <span class="spec-chip">💧 Aerated Bark</span>
+              <span class="spec-chip">💨 70% Humidity</span>
+            </div>
+            <div class="plant-footer">
+              <span class="plant-price">$120</span>
+              <button class="ask-doctor-btn" data-ask-doctor="How do I increase humidity for an Anthurium Clarinervium indoors?">
+                <span>🌱 Ask Doctor</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Care Pillars -->
+    <section id="pillars" class="pillars-section">
+      <div class="section-header">
+        <span class="section-tag">Botanical Science</span>
+        <h2 class="section-title">The Four Pillars of Thriving Flora</h2>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">☀️</div>
+          <h3 class="pillar-title">Light Dynamics</h3>
+          <p class="pillar-text">Foot-candles and spectrum matter. We calibrate lumens from north-facing indirect light to full southern exposure.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">💧</div>
+          <h3 class="pillar-title">Hydration Cycles</h3>
+          <p class="pillar-text">Prevent root hypoxia with precision watering schedules customized to seasonality and pot porousness.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🪴</div>
+          <h3 class="pillar-title">Substrate Aeration</h3>
+          <p class="pillar-text">Chunky horticultural mixes with pumice, biochar, and coco coir keep root zones oxygenated.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🐛</div>
+          <h3 class="pillar-title">Organic Defense</h3>
+          <p class="pillar-text">Cold-pressed neem, beneficial nematodes, and potassium salts eradicate pests without synthetic toxins.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Integration Architecture Section -->
+    <section id="architecture" class="integration-section">
+      <div class="architecture-banner">
+        <div class="arch-header">
+          <span class="section-tag">Technical Architecture</span>
+          <h2 class="section-title">Where &amp; How We Integrate With Amazon Connect</h2>
+          <p class="section-desc">An end-to-end breakdown of the Control Plane, Data Plane WebSocket, and Contact Flow.</p>
+        </div>
+
+        <div class="arch-steps-grid">
+          <div class="arch-step-card">
+            <div class="step-num">1</div>
+            <h4>User Engagement</h4>
+            <p>
+              Visitor clicks a diagnostic chip or opens the chat widget. Frontend initiates an HTTP POST to the backend endpoint <code>/api/start-chat</code>.
+            </p>
+          </div>
+
+          <div class="arch-step-card">
+            <div class="step-num">2</div>
+            <h4>Control Plane (Backend)</h4>
+            <p>
+              Backend calls Amazon Connect's <code>StartChatContact</code> API with the <code>InstanceId</code>, <code>ContactFlowId</code>, and customer name. Returns <code>ParticipantToken</code>.
+            </p>
+          </div>
+
+          <div class="arch-step-card">
+            <div class="step-num">3</div>
+            <h4>Data Plane (ChatJS)</h4>
+            <p>
+              Frontend loads <code>amazon-connect-chat.js</code>. Calls <code>connect.ChatSession.create()</code> and opens the Participant Service WebSocket via <code>session.connect()</code>.
+            </p>
+          </div>
+
+          <div class="arch-step-card">
+            <div class="step-num">4</div>
+            <h4>Contact Flow &amp; Lex Bot</h4>
+            <p>
+              Amazon Connect routes the chat to an Amazon Lex V2 Botanical Bot or Bedrock Agent, and seamlessly escalates to human agents in the queue when needed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-copy">
+        <p>&copy; 2026 Verdant &amp; Wild Botanicals. Built with Amazon Connect ChatJS &amp; AWS SDK v3.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#plants">Plants</a>
+        <a href="#pillars">Care</a>
+        <a href="#architecture">Architecture</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       AMAZON CONNECT CHATBOT WIDGET TEMPLATE
+       ======================================================== -->
+
+  <!-- Floating Launcher Button -->
+  <button id="chat-launcher" class="chat-launcher-btn" aria-label="Open Plant Care Chatbot">
+    <span class="launcher-icon-open">
+      <!-- Botanical Leaf & Chat SVG -->
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        <path d="M12 7c-2 0-3.5 1.5-3.5 3.5 0 2.5 3.5 5.5 3.5 5.5s3.5-3 3.5-5.5C15.5 8.5 14 7 12 7z" stroke-width="1.8"/>
+      </svg>
+    </span>
+    <span class="launcher-icon-close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </span>
+    <span id="launcher-badge" class="launcher-badge">1</span>
+  </button>
+
+  <!-- Chat Widget Window -->
+  <section id="chat-widget" class="chat-widget-container" aria-label="Sprout Plant Care Assistant">
+    
+    <!-- Widget Header -->
+    <header class="chat-header">
+      <div class="chat-header-profile">
+        <div class="chat-avatar-frame">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5z"/>
+          </svg>
+        </div>
+        <div class="header-meta">
+          <h3 class="chat-header-title">Sprout 🌱</h3>
+          <div id="chat-status-badge" class="chat-status-pill">
+            <span class="status-dot connecting"></span>
+            <span class="status-label">Initializing...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-header-actions">
+        <!-- Settings / AWS Connect Info -->
+        <button id="open-config-btn" class="header-action-btn" title="Amazon Connect Settings" aria-label="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+
+        <!-- Reset Chat -->
+        <button id="chat-reset-btn" class="header-action-btn" title="Restart Conversation" aria-label="Restart">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"/>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+          </svg>
+        </button>
+
+        <!-- Minimize -->
+        <button id="chat-minimize-btn" class="header-action-btn" title="Minimize" aria-label="Minimize">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </button>
+
+        <!-- Close -->
+        <button id="chat-close-btn" class="header-action-btn" title="Close" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Message Stream -->
+    <div id="chat-messages" class="chat-messages-container">
+      <div class="chat-welcome-banner">
+        <h4>🌿 Verdant &amp; Wild Care Bot</h4>
+        <p>Ask about yellow leaves, watering schedules, potting soil, or connect with a human horticulturist.</p>
+      </div>
+      <!-- Messages dynamically appended here -->
+    </div>
+
+    <!-- Typing Indicator -->
+    <div id="typing-indicator" class="typing-indicator-row">
+      <div class="typing-bubble">
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+      </div>
+      <span id="typing-participant-label" class="typing-label">Sprout is typing...</span>
+    </div>
+
+    <!-- Dynamic Quick Reply Chips Carousel -->
+    <div id="chat-quick-replies" class="chat-quick-replies">
+      <!-- Quick reply chips dynamically injected here -->
+    </div>
+
+    <!-- Input Footer -->
+    <footer class="chat-input-area">
+      <input type="text" id="chat-input" class="chat-input" placeholder="Ask about plant care, water, soil..." autocomplete="off">
+      <button id="chat-send-btn" class="chat-send-btn" aria-label="Send Message">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </footer>
+
+    <div class="chat-footer-badge">
+      <span>Powered by <strong>Amazon Connect ChatJS</strong></span>
+    </div>
+
+    <!-- Configuration Modal (For inspecting AWS Connect parameters) -->
+    <div id="connect-config-modal" class="config-modal-backdrop">
+      <div class="config-modal-content">
+        <div class="config-modal-header">
+          <h3>Amazon Connect Settings</h3>
+          <button id="close-config-btn" class="modal-close-btn">&times;</button>
+        </div>
+
+        <div id="config-details-info" class="config-details-info">
+          <!-- Populated from /api/config-status -->
+        </div>
+
+        <div class="config-form-group">
+          <label for="customer-name-field">Your Display Name in Connect:</label>
+          <input type="text" id="customer-name-field" class="config-input" value="Plant Friend" placeholder="Enter your name">
+        </div>
+
+        <button id="save-name-btn" class="config-btn-save">Update Display Name</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Load Scripts in order -->
+  <!-- 1. Amazon Connect Official ChatJS bundle -->
+  <script src="/js/amazon-connect-chat.js"></script>
+  <!-- 2. ChatJS Client Wrapper -->
+  <script src="/js/chat-client.js"></script>
+  <!-- 3. Chat UI Controller -->
+  <script src="/js/chat-ui.js"></script>
+  <!-- 4. Main Page App Initializer -->
+  <script src="/js/main.js"></script>
+</body>
+</html>
+
